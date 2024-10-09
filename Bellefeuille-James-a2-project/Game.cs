@@ -33,6 +33,7 @@ namespace Game10003
             {//this swaps the animation every 8 frames
                 leftLeg = !leftLeg;
             }
+            //leftLeg = false;
             if (leftLeg)
             {
                 // back right leg
@@ -55,24 +56,22 @@ namespace Game10003
             else
             {
                 // back right leg
-                Draw.Ellipse(location + 130, 170, 12, 16);
-                Draw.Ellipse(location + 136, 174, 14, 12);
-                Draw.Quad(location + 70, 150, location + 80, 150, location + 134, 174, location + 144, 174);
+                Draw.Circle(location + 90+60, 192, 9);
+                Draw.Quad(location + 70+60, 150, location + 80+60, 150, location + 90+60, 190, location + 82 + 60, 190);
                 // back left leg
-                Draw.Circle(location + 173, 194, 8);
-                Draw.Quad(location + 100, 150, location + 110, 150, location + 173, 192, location + 165, 192);
+                Draw.Ellipse(location + 100 + 60, 168, 10, 13);
+                Draw.Ellipse(location + 106 + 60, 172, 12, 9);
+                Draw.Quad(location + 100 + 60, 150, location + 110 + 60, 150, location + 103 + 60, 170, location + 113 + 60, 170);
+
                 // front right leg
-                Draw.Circle(location + 90, 192, 9);
-                Draw.Quad(location + 130, 150, location + 140, 150, location + 90, 190, location + 82, 190);
+                Draw.Ellipse(location + 130 -60, 170, 12, 16);
+                Draw.Ellipse(location + 136 - 60, 174, 14, 12);
+                Draw.Quad(location + 130 - 60, 150, location + 140 -60, 150, location + 134 - 60, 174, location + 144 - 60, 174);
 
                 //front left leg
-                Draw.Ellipse(location + 100, 168, 10, 13);
-                Draw.Ellipse(location + 106, 172, 12, 9);
-                Draw.Quad(location + 150, 150, location + 160, 150, location + 103, 170, location + 113, 170);
+                Draw.Circle(location + 173 - 60, 194, 8);
+                Draw.Quad(location + 150 - 60, 150, location + 160 - 60, 150, location + 173 - 60, 192, location + 165 - 60, 192);
             }
-            
-
-
 
             // body
             Draw.Capsule(location + 70, 138, location+160, 136, 13);
