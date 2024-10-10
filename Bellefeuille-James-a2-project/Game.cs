@@ -18,11 +18,9 @@ namespace Game10003
         int pawTime = 0;
         Color brightOrange = new Color(180, 100, 50);
         Color darkOrange = new Color(150, 70, 40);
-
         Color Brown = new Color(80, 40, 10);
         Color coldBrown = new Color(100, 70, 60);
         Color hotBrown = new Color(130, 30, 0);
-
         Color windowBlue = new Color(100, 110, 200);
 
         static int frameRate = 20; //how many frames till animation updates
@@ -118,7 +116,7 @@ namespace Game10003
 
         public void CatAction()
         {
-            if (tempature < -500 || tempature > 500 || hunger > 800)
+            if (tempature < -500 || tempature > 500 || hunger > 500)
             { // here the cat wants something so it paws at the mouse
                 pawTime++;
                 Draw.FillColor = darkOrange;
@@ -136,14 +134,11 @@ namespace Game10003
                 // head
                 Draw.Circle(catPosition, 95, 12);
 
-
                 // paws
                 if (pawTime < frameRate)
                 {
                     Draw.Circle(catPosition - 14, 60, 7);
                     Draw.Circle(catPosition + 14, 87, 7);
-
-
                 }
                 else if (pawTime < frameRate * 2)
                 {
@@ -159,7 +154,6 @@ namespace Game10003
             }
         }
 
-        
         public void backgroundDraw()
         {
             Color Background = Brown;
@@ -172,7 +166,7 @@ namespace Game10003
                Background = hotBrown;
             }
             for (int i = 0; i < 30; i++)
-            {
+            { // This draws the pattern repeating for the room
                 Draw.FillColor = Color.Black;
                 Draw.Rectangle(i * 20, 8, 2, 180);
                 Draw.FillColor = Background;
@@ -195,7 +189,7 @@ namespace Game10003
             Draw.Rectangle(30, 140, 70, 60);
             Draw.FillColor = Color.Black;
             if (heaterWoodLeft > 0)
-            {
+            { // if the heater is on it has a red glow
                 Draw.FillColor = Color.Red;
             }
             
@@ -228,7 +222,6 @@ namespace Game10003
             Draw.FillColor = Color.DarkGray;
             Draw.Rectangle(500, 130, 40, 60);
             Draw.Rectangle(550, 130, 40, 60);
-
             
         }
 
@@ -281,15 +274,15 @@ namespace Game10003
             if (mouseX > catPosition + 8)// this is +120 so its in the middle of the cat.
             {
                 catPosition += 2;
-                catWalk(catPosition, 1); // this sends the x coordinate to the cat drawing function
+                catWalk(catPosition, 1); // this sends the x coordinate and direction to the cat drawing function
             }
             else if (mouseX < catPosition - 8)
             {
                 catPosition -= 2;
-                catWalk(catPosition, -1); // this sends the x coordinate to the cat drawing function
+                catWalk(catPosition, -1); // this sends the x coordinate and direction to the cat drawing function
             }
             else
-            {
+            { // here the cat either paws at the screen or lays down
                 CatAction();
             }
 
@@ -300,7 +293,7 @@ namespace Game10003
 
             // heat and hunger changes.
             tempature += Random.Integer(-5, 5);
-            hunger += Random.Integer(-4, 6);
+            hunger += Random.Integer(-5, 7);
             if (windowOpen == true)
             { // window coolint
                 tempature -= 1;
@@ -332,7 +325,7 @@ namespace Game10003
             {
                 Console.WriteLine($"temp {tempature}, food {hunger}, Wood {heaterWoodLeft}, food {food[0]}"); // this is for debugging and will be commented out
                 if (held == "none")
-                {
+                {// if your holding nothing you can interact with these
                     if (mouseX > 400 && mouseX < 450 && mouseY > 20 && mouseY < 90)
                     {
                         windowOpen = !windowOpen;
@@ -340,7 +333,7 @@ namespace Game10003
                     }
 
                     if (mouseX > 500 && mouseY > 130)
-                    {
+                    { // grab either food or wood from cupboard
                         if (mouseX > 550)
                         {
                             held = "food";
@@ -353,33 +346,28 @@ namespace Game10003
                     }
                 }
                 else if (held == "wood")
-                {
+                { // if your holding wood
                     if (mouseX > 500 && mouseX < 550 && mouseY > 130)
-                    {
+                    { //put wood back in cupboard
                         held = "none";
                     }
                     else if (mouseX < 100 && mouseX > 30 && mouseY > 140)
-                    {
+                    { // put wood in fireplace
                         held = "none";
                         heaterWoodLeft += 150;
                     }
                 }
                 else if (held == "food")
-                {
+                { // if your holding food
                     if (mouseX > 550 && mouseY > 130)
-                    {
+                    { //put food back in cupboard
                         held = "none";
                     }
                     else
                     {
                         bool quitLoop = false;
                         for (int i = 0; i < 5; i++)
-                        {
-                            if (catPosition <= food[i] - 5 && catPosition >= food[i] + 5)
-                            {
-                                food[i] = -1;
-                                hunger -= 300;
-                            }
+                        { // feed cat
                             if (food[i] == -1 && quitLoop == false)
                             {
                                 food[i] = (int)mouseX;
@@ -390,8 +378,6 @@ namespace Game10003
                     }
                 }
             }
-            // add feeding mechanic
-
         }
     }
 }
