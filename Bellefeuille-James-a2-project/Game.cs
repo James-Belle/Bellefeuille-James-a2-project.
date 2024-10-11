@@ -43,7 +43,7 @@ namespace Game10003
         /// <summary>
         ///     Update runs every frame.
         /// </summary>
-        public void catWalk(int location, int direction)
+        public void CatWalk(int location, int direction)
         {
             if (location%frameRate == 0)
             {//this swaps the animation every 8 frames
@@ -154,7 +154,7 @@ namespace Game10003
             }
         }
 
-        public void backgroundDraw()
+        public void BackgroundDraw()
         {
             Color Background = Brown;
             if (tempature < -1100)
@@ -264,7 +264,7 @@ namespace Game10003
             float mouseX = Input.GetMouseX();
             float mouseY = Input.GetMouseY();
             // draw background
-            backgroundDraw();
+            BackgroundDraw();
             //draw furniture
             Furniture();
 
@@ -274,12 +274,12 @@ namespace Game10003
             if (mouseX > catPosition + 8)// this is +120 so its in the middle of the cat.
             {
                 catPosition += 2;
-                catWalk(catPosition, 1); // this sends the x coordinate and direction to the cat drawing function
+                CatWalk(catPosition, 1); // this sends the x coordinate and direction to the cat drawing function
             }
             else if (mouseX < catPosition - 8)
             {
                 catPosition -= 2;
-                catWalk(catPosition, -1); // this sends the x coordinate and direction to the cat drawing function
+                CatWalk(catPosition, -1); // this sends the x coordinate and direction to the cat drawing function
             }
             else
             { // here the cat either paws at the screen or lays down
