@@ -292,8 +292,8 @@ namespace Game10003
             DrawUi();
 
             // heat and hunger changes.
-            tempature += Random.Integer(-5, 5);
-            hunger += Random.Integer(-5, 7);
+            tempature += Random.Integer(-6, 6);
+            hunger += Random.Integer(-6, 8);
             if (windowOpen == true)
             { // window coolint
                 tempature -= 1;
@@ -311,7 +311,7 @@ namespace Game10003
                 if (catPosition <= food[i] + 10 && catPosition >= food[i] - 10)
                 {
                     food[i] = -1;
-                    hunger -= 200;
+                    hunger -= 500;
                 }
             }
 
